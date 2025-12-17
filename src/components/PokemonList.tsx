@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function PokemonList() {
   const url = "https://pokeapi.co/api/v2/pokemon/";
-  const [currUrl, setUrl] = useState(url);
+  const [currentUrl, setUrl] = useState(url);
 
-  fetch(currUrl)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
+  useEffect(() => {
+    fetch(currentUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, [currentUrl]);
 
   return (
     <>
-      <div>p</div>
+      {/* {currentData.map((item) => (
+        <p>{item.results.name}</p>
+      ))} */}
     </>
   );
 }
