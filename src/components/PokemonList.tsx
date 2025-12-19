@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-
+export interface PokemonData {}
 export interface Pokemon {
   id: number;
   name: string;
+  url: string;
 }
 
 export interface Page {
@@ -13,24 +14,32 @@ export interface Page {
 }
 
 function PokemonList() {
-  const [pokemon, setPokemon] = useState<Pokemon[]>([]);
-  const url = "https://pokeapi.co/api/v2/pokemon/";
-  const [currentUrl, setUrl] = useState(url);
+  const initialUrl = "https://pokeapi.co/api/v2/pokemon/";
+  const [pokemonData, setPokemonData] = useState([]);
+  const [nextUrl, setNextUrl] = useState<string>(initialUrl);
 
   useEffect(() => {
-    fetch(currentUrl)
+    fetch(nextUrl)
       .then((res) => res.json())
       .then((data: Page) => {
-        setPokemon((prev) => [...prev, ...data.results]);
+        data.results.forEach((item) =>
+          fetch(item.url)
+            .then((res) => res.json())
+            .then((pokemon) => {
+              console.log(pokemon);
+            })
+        );
       });
-  }, [currentUrl]);
+  }, [nextUrl]);
 
-  console.log(pokemon);
+  // console.log(pokemonData);
   return (
     <>
-      {pokemon.map((item) => (
-        <p>{item.name}</p>
-      ))}
+      {/* {pokemon.map((item) => (
+        <p>
+          {item.name} {item.url}
+        </p>
+      ))} */}
     </>
   );
 }
