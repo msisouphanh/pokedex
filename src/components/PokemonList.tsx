@@ -42,13 +42,18 @@ function PokemonList() {
   // console.log(pokemon);
   return (
     <>
-      {pokemon.map((item) => (
-        <figure key={item.name}>
-          <img src={item.sprites.front_default}></img>
-          <figcaption>{item.name}</figcaption>
-        </figure>
-      ))}
-      <button>View More</button>
+      <div className="grid grid-cols-5">
+        {pokemon.map((item) => (
+          <figure
+            key={item.name}
+            className="flex flex-col justify-center items-center"
+          >
+            <img src={item.sprites.front_default}></img>
+            <figcaption>{item.name}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <button>view more</button>
     </>
   );
 }
