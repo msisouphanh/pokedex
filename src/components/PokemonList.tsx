@@ -39,14 +39,14 @@ function PokemonList() {
       .then((fullPokemonData) => setPokemon(fullPokemonData));
   }, [nextUrl]);
 
-  // console.log(pokemonData);
+  // console.log(pokemon);
   return (
     <>
       {pokemon.map((item) => (
-        <div key={item.name}>
+        <figure key={item.name}>
           <img src={item.sprites.front_default}></img>
-          <p>{item.name}</p>
-        </div>
+          <figcaption>{item.name}</figcaption>
+        </figure>
       ))}
       <button>View More</button>
     </>
