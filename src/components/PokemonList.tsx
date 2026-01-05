@@ -22,8 +22,6 @@ export interface Page {
   results: PokemonInfo[];
 }
 
-let x = "";
-
 function PokemonList() {
   const initialUrl = "https://pokeapi.co/api/v2/pokemon/";
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
@@ -57,7 +55,6 @@ function PokemonList() {
 
       setPokemon((prev) => {
         const map = new Map(prev.map((p) => [p.name, p]));
-        // console.log(map);
         fullPokemonData.forEach((p) => map.set(p.name, p));
         return [...map.values()];
       });
