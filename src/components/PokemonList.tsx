@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export interface PokemonSprites {
   front_default: string;
@@ -72,14 +73,18 @@ function PokemonList() {
   return (
     <>
       <div className="grid grid-cols-5">
-        {pokemon.map((item) => (
-          <figure
-            key={item.name}
-            className="flex flex-col justify-center items-center"
-          >
-            <img src={item.sprites.front_default}></img>
-            <figcaption>{item.name}</figcaption>
-          </figure>
+        {pokemon.map((pkm) => (
+          <Link to={`/${pkm.name}`} state={pkm}>
+            <div>
+              <figure
+                key={pkm.name}
+                className="flex flex-col justify-center items-center"
+              >
+                <img src={pkm.sprites.front_default}></img>
+                <figcaption>{pkm.name}</figcaption>
+              </figure>
+            </div>
+          </Link>
         ))}
       </div>
       <button onClick={changeUrl}>view more</button>
