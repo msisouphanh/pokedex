@@ -22,24 +22,56 @@ export interface Page {
   results: PokemonInfo[];
 }
 
+let x = "";
+
 function PokemonList() {
   const initialUrl = "https://pokeapi.co/api/v2/pokemon/";
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [nextUrl, setNextUrl] = useState<string>(initialUrl);
+  const [pageUrl, setPageUrl] = useState<string | null>();
+
+  // useEffect(() => {
+  //   fetch(nextUrl)
+  //     .then((res) => res.json())
+  //     .then((data: Page) => {
+  //       x = data.next;
+  //       const requests = data.results.map((item) =>
+  //         fetch(item.url).then((res) => res.json())
+  //       );
+  //       return Promise.all(requests);
+  //     })
+  //     .then((fullPokemonData) => setPokemon(fullPokemonData));
+  // }, [nextUrl]);
 
   useEffect(() => {
-    fetch(nextUrl)
-      .then((res) => res.json())
-      .then((data: Page) => {
-        const requests = data.results.map((item) =>
-          fetch(item.url).then((res) => res.json())
-        );
-        return Promise.all(requests);
-      })
-      .then((fullPokemonData) => setPokemon(fullPokemonData));
-  }, [nextUrl]);
+    async function load() {
+      const res = await fetch(nextUrl);
+      const data: Page = await res.json();
 
-  // console.log(pokemon);
+      setNextUrl(data.next);
+      const request = data.results.map((item) =>
+        fetch(item.url).then((res) => res.json())
+      );
+
+      const fullPokemonData = await Promise.all(request);
+
+      setPokemon((prev) => {
+        const map = new Map(prev.map((p) => [p.name, p]));
+        // console.log(map);
+        fullPokemonData.forEach((p) => map.set(p.name, p));
+        return [...map.values()];
+      });
+    }
+
+    load();
+  }, [pageUrl]);
+
+  const changeUrl = () => {
+    if (nextUrl) {
+      setPageUrl(nextUrl);
+    }
+  };
+
   return (
     <>
       <div className="grid grid-cols-5">
@@ -53,7 +85,7 @@ function PokemonList() {
           </figure>
         ))}
       </div>
-      <button>view more</button>
+      <button onClick={changeUrl}>view more</button>
     </>
   );
 }
