@@ -52,17 +52,6 @@ function PokemonDetails() {
 
         setEvoPokemon([...evoPokemons]);
       }
-      // const requests = pkmEvoUrls.map((url) =>
-      //   fetch(url).then((res) => res.json())
-      // );
-
-      // const fullEvoPokemonData = await Promise.all(requests);
-
-      // setEvoPokemon((prev) => {
-      //   const map = new Map(prev.map((p) => [p.name, p]));
-      //   fullEvoPokemonData.forEach((p) => map.set(p.name, p));
-      //   return [...map.values()];
-      // });
     }
     load();
   }, []);
