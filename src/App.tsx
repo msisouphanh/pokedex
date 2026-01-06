@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage.tsx";
-import PokemonPage from "./pages/Pokemonpage.tsx";
+import PokemonPage from "./pages/PokemonPage.tsx";
 import { useEffect, useState } from "react";
 
 export interface PokemonSprites {
