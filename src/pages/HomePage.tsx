@@ -1,9 +1,15 @@
 import PokemonList from "../components/PokemonList";
+import { type Pokemon } from "../App.tsx";
 
-function HomePage() {
+interface Props {
+  pokemon: Pokemon[];
+  onLoadMore: () => void;
+}
+
+function HomePage({ pokemon, onLoadMore }: Props) {
   return (
     <>
-      <PokemonList />
+      <PokemonList pokemon={pokemon} onLoadMore={onLoadMore} />
     </>
   );
 }
