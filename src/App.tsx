@@ -19,6 +19,10 @@ export interface Pokemon {
   weight: number;
   sprites: PokemonSprites;
   types: PokemonType[];
+  species: {
+    name: string;
+    url: string;
+  };
 }
 
 export interface PokemonInfo {
