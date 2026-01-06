@@ -23,7 +23,7 @@ function PokemonDetails() {
 
       const evolutionRes = await fetch(speciesData.evolution_chain.url);
       const evolutionData = await evolutionRes.json();
-      // console.log(evolutionData);
+      console.log(evolutionData);
 
       function getPkmEvoNames(node: Chain, result: string[] = []) {
         result.push(node.species.name);
@@ -42,18 +42,27 @@ function PokemonDetails() {
       const pkmEvoUrls = pkmEvoNames.map(
         (pkmEndUrl) => `https://pokeapi.co/api/v2/pokemon/${pkmEndUrl}`
       );
+      const evoPokemons: Pokemon[] = [];
 
-      const requests = pkmEvoUrls.map((url) =>
-        fetch(url).then((res) => res.json())
-      );
+      for (const pkmUrl of pkmEvoUrls) {
+        const res = await fetch(pkmUrl);
+        const data: Pokemon = await res.json();
 
-      const fullEvoPokemonData = await Promise.all(requests);
+        evoPokemons.push(data);
 
-      setEvoPokemon((prev) => {
-        const map = new Map(prev.map((p) => [p.name, p]));
-        fullEvoPokemonData.forEach((p) => map.set(p.name, p));
-        return [...map.values()];
-      });
+        setEvoPokemon([...evoPokemons]);
+      }
+      // const requests = pkmEvoUrls.map((url) =>
+      //   fetch(url).then((res) => res.json())
+      // );
+
+      // const fullEvoPokemonData = await Promise.all(requests);
+
+      // setEvoPokemon((prev) => {
+      //   const map = new Map(prev.map((p) => [p.name, p]));
+      //   fullEvoPokemonData.forEach((p) => map.set(p.name, p));
+      //   return [...map.values()];
+      // });
     }
     load();
   }, []);
