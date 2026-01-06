@@ -39,9 +39,10 @@ export interface Page {
 }
 
 function App() {
-  const initialUrl = "https://pokeapi.co/api/v2/pokemon/";
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
-  const [nextUrl, setNextUrl] = useState<string>(initialUrl);
+  const [nextUrl, setNextUrl] = useState<string>(
+    "https://pokeapi.co/api/v2/pokemon/"
+  );
   const [pageUrl, setPageUrl] = useState<string | null>();
 
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
       const data: Page = await res.json();
 
       setNextUrl(data.next);
+
       const request = data.results.map((item) =>
         fetch(item.url).then((res) => res.json())
       );

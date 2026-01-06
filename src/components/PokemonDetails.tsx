@@ -1,44 +1,59 @@
-import { Await, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { type Pokemon } from "../App.tsx";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
-// export interface chain {
-
-// }
+interface Chain {
+  species: {
+    name: string;
+  };
+  evolves_to: Chain[];
+}
 
 function PokemonDetails() {
   const location = useLocation();
   const pkm = location.state as Pokemon;
   const multiplier = 0.220462;
 
-  // console.log(pkm);
+  const [evoPokemon, setEvoPokemon] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     async function load() {
       const speciesRes = await fetch(pkm.species.url);
       const speciesData = await speciesRes.json();
-      // console.log(speciesData.evolution_chain.url);
+
       const evolutionRes = await fetch(speciesData.evolution_chain.url);
       const evolutionData = await evolutionRes.json();
+      // console.log(evolutionData);
 
-      // const thirdEvolution =
-      //   evolutionData.chain.evolves_to[0].evolves_to[0].species.name;
-      // const secondEvolution = evolutionData.chain.evolves_to[0].species.name;
-      // const firstEvolution = evolutionData.chain.species.name;
-
-      function collectEvolutionNames(node, result = []) {
+      function getPkmEvoNames(node: Chain, result: string[] = []) {
+        result.push(node.species.name);
         for (const child of node.evolves_to) {
-          result.push(child.species.name);
-          collectEvolutionNames(child, result);
+          // console.log(child)
+          getPkmEvoNames(child, result);
         }
 
         return result;
       }
-      // console.log(evolutionData);
-      console.log(collectEvolutionNames(evolutionData.chain));
+
       // console.log(evolutionData.chain.evolves_to[0].evolves_to[0].species.name);
       // console.log(evolutionData.chain.evolves_to[0].species.name);
       // console.log(evolutionData.chain.species.name);
+      const pkmEvoNames = getPkmEvoNames(evolutionData.chain);
+      const pkmEvoUrls = pkmEvoNames.map(
+        (pkmEndUrl) => `https://pokeapi.co/api/v2/pokemon/${pkmEndUrl}`
+      );
+
+      const requests = pkmEvoUrls.map((url) =>
+        fetch(url).then((res) => res.json())
+      );
+
+      const fullEvoPokemonData = await Promise.all(requests);
+
+      setEvoPokemon((prev) => {
+        const map = new Map(prev.map((p) => [p.name, p]));
+        fullEvoPokemonData.forEach((p) => map.set(p.name, p));
+        return [...map.values()];
+      });
     }
     load();
   }, []);
@@ -48,6 +63,9 @@ function PokemonDetails() {
       <h1>{pkm.name}</h1>
       <p>Weight: {parseFloat((pkm.weight * multiplier).toFixed(1))} lbs</p>
       <p>Types: {pkm.types.map((p) => p.type.name)} </p>
+      {evoPokemon.map((p) => (
+        <img src={p.sprites.front_default} />
+      ))}
     </>
   );
 }
