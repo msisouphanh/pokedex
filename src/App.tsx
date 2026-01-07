@@ -5,8 +5,12 @@ import { useEffect, useState } from "react";
 
 export interface PokemonSprites {
   front_default: string;
+  other: {
+    "official-artwork": {
+      front_default: string;
+    };
+  };
 }
-
 export interface PokemonType {
   type: {
     name: string;

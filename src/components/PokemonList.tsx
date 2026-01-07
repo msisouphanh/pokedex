@@ -13,7 +13,10 @@ function PokemonList({ pokemon, onLoadMore }: Props) {
         {pokemon.map((pkm) => (
           <Link key={pkm.name} to={`/${pkm.name}`} state={pkm}>
             <figure className="flex flex-col justify-center items-center">
-              <img src={pkm.sprites.front_default} alt={pkm.name} />
+              <img
+                src={pkm.sprites.other["official-artwork"].front_default}
+                alt={pkm.name}
+              />
               <figcaption>{pkm.name}</figcaption>
             </figure>
           </Link>
