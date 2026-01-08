@@ -105,40 +105,74 @@ function PokemonDetails() {
     }
   }, [pkm, pokemonName]);
 
+  function capitalizeStr(str: string) {
+    let result: string;
+    result = str.charAt(0).toLocaleUpperCase() + str.slice(1);
+    return result;
+  }
+
   return (
     <>
       {pkm ? (
         <>
-          <div className="w-full flex justify-center flex-col md:flex-row items-start gap-6 px-4">
-            {/* Card */}
-            <div className="flex flex-col items-center md:items-start">
-              <div className="border rounded-lg w-[542px] h-[392px]">
-                <div className="flex justify-center">
-                  <h1>
-                    {pkm.name.charAt(0).toUpperCase() + pkm.name.slice(1)}
-                  </h1>
+          <div className="w-full">
+            <div className="flex flex-col md:flex-row max-w-6xl mx-auto bg-blue-500">
+              {/* Card */}
+              <div className="flex flex-col items-center bg-amber-600 md:w-[542px] h-[392px]">
+                <div className="border rounded-lg w-full h-full">
+                  <div className="flex justify-center">
+                    <h1>{capitalizeStr(pkm.name)}</h1>
+                  </div>
+                  <div className="flex justify-center m-5">
+                    <img
+                      className="w-[215px] h-[215px]"
+                      src={pkm.sprites.other["official-artwork"].front_default}
+                    />
+                  </div>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {pkm.types.map((t) => (
+                      <div className="flex flex-1">
+                        <span
+                          key={t.type.name}
+                          className="border text-center w-full rounded-md border-slate-700 ml-1 mr-1 px-3 py-1"
+                        >
+                          {capitalizeStr(t.type.name)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex justify-center m-5">
-                  <img
-                    className="w-[215px] h-[215px]"
-                    src={pkm.sprites.other["official-artwork"].front_default}
-                  />
-                </div>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {pkm.types.map((t) => (
-                    <span
-                      key={t.type.name}
-                      className="border w-full rounded-md border-slate-700 px-3 py-1"
-                    >
-                      {t.type.name.charAt(0).toUpperCase() +
-                        t.type.name.slice(1)}
-                    </span>
-                  ))}
+              </div>
+              <div className="flex flex-col">
+                <p>{pkmDesc}</p>
+                <div className="border rounded-lg">
+                  <div className="grid grid-cols-2 text-center">
+                    <div>
+                      <h1>Pokedex Number</h1>
+                      <p>{pkm.id}</p>
+                    </div>
+                    <div>
+                      <h1>Abilities</h1>
+                      <p>
+                        {pkm.abilities
+                          .map((p) => capitalizeStr(p.ability.name))
+                          .join(", ")}
+                      </p>
+                    </div>
+                    <div>
+                      <h1>Weight</h1>
+                      <p>{(pkm.weight * multiplier).toFixed(1)} lbs</p>
+                    </div>
+                    <div>
+                      <h1>Height</h1>
+                      <p>{pkm.height}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="max-w-xl w-full">
-              <p>{pkmDesc}</p>
+            <div className="w-full max-w-6xl mx-auto">
+              <p>test</p>
             </div>
           </div>
           {pkm.stats.map((p) => (
