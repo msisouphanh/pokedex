@@ -147,26 +147,26 @@ function PokemonDetails() {
                 <p className="m-2">{pkmDesc}</p>
                 <div className="border rounded-lg mx-2">
                   <div className="grid grid-cols-2 text-center">
-                    <div>
+                    <section>
                       <h1>Pokedex Number</h1>
                       <p>{String(pkm.id).padStart(3, "0")}</p>
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                       <h1>Abilities</h1>
                       <p>
                         {pkm.abilities
                           .map((p) => capitalizeStr(p.ability.name))
                           .join(", ")}
                       </p>
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                       <h1>Weight</h1>
                       <p>{(pkm.weight * multiplier).toFixed(1)} lbs</p>
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                       <h1>Height</h1>
                       <p>{pkm.height}</p>
-                    </div>
+                    </section>
                   </div>
                 </div>
               </div>
