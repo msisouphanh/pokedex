@@ -144,12 +144,12 @@ function PokemonDetails() {
                 </div>
               </div>
               <div className="flex flex-col">
-                <p>{pkmDesc}</p>
-                <div className="border rounded-lg">
+                <p className="m-2">{pkmDesc}</p>
+                <div className="border rounded-lg mx-2">
                   <div className="grid grid-cols-2 text-center">
                     <div>
                       <h1>Pokedex Number</h1>
-                      <p>{pkm.id}</p>
+                      <p>{String(pkm.id).padStart(3, "0")}</p>
                     </div>
                     <div>
                       <h1>Abilities</h1>
