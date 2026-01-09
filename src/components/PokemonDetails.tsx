@@ -115,15 +115,16 @@ function PokemonDetails() {
     const percentage = Math.min((stat / 255) * 100, 100);
     return percentage;
   }
+
   return (
     <>
       {pkm ? (
         <>
           <div className="w-full">
-            <div className="flex flex-col md:flex-row max-w-6xl mx-auto bg-blue-500">
+            <div className="flex flex-col md:flex-row max-w-6xl mx-auto">
               {/* Card */}
-              <div className="flex flex-col items-center bg-amber-600 md:w-[542px] h-[392px]">
-                <div className="border rounded-lg w-full h-full">
+              <div className="flex flex-col items-center md:w-[542px] h-[390px] flex-shrink-1 lg:flex-shrink-0">
+                <div className="border dark bg-cardgray rounded-lg w-full h-full">
                   <div className="flex justify-center">
                     <h1>{capitalizeStr(pkm.name)}</h1>
                   </div>
@@ -147,16 +148,16 @@ function PokemonDetails() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col">
-                <p className="m-2">{pkmDesc}</p>
-                <div className="border rounded-lg mx-2">
+              <div className="flex flex-col gap-5">
+                <p className="text-left pl-5">{pkmDesc}</p>
+                <div className="border rounded-lg ml-5">
                   <div className="grid grid-cols-2 text-center">
                     <section>
-                      <h1>Pokedex Number</h1>
+                      <h2>Pokedex Number</h2>
                       <p>#{String(pkm.id).padStart(3, "0")}</p>
                     </section>
                     <section>
-                      <h1>Abilities</h1>
+                      <h2>Abilities</h2>
                       <p>
                         {pkm.abilities
                           .map((p) => capitalizeStr(p.ability.name))
@@ -164,18 +165,18 @@ function PokemonDetails() {
                       </p>
                     </section>
                     <section>
-                      <h1>Weight</h1>
+                      <h2>Weight</h2>
                       <p>{(pkm.weight * multiplier).toFixed(1)} lbs</p>
                     </section>
                     <section>
-                      <h1>Height</h1>
+                      <h2>Height</h2>
                       <p>{pkm.height}</p>
                     </section>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="w-full max-w-6xl mx-auto">
+            <div className="w-full max-w-6xl mx-auto mt-5">
               <div className="border rounded-lg">
                 <h1>stats</h1>
                 <div className="grid grid-cols-6 gap-6 bg-amber-950 ">
@@ -205,19 +206,30 @@ function PokemonDetails() {
               </div>
             </div>
           </div>
-          <div className="w-full max-w-6xl mx-auto">
+          <div className="w-full max-w-6xl mx-auto mt-5">
             {/* Evolutions */}
             <div className="border rounded-lg">
-              <h1>Evolutions</h1>
-              <div className="flex flex-col justify-center items-center md:flex-row">
+              <h1 className="mx-5">Evolutions</h1>
+              <div className="flex flex-col flex-wrap justify-between items-center md:flex-row mx-4">
                 {evoPokemon.map((p) => (
-                  <figure className="text-center">
-                    <img
-                      key={p.name}
-                      src={p.sprites.other["official-artwork"].front_default}
-                    />
-                    <figcaption>{p.name}</figcaption>
-                  </figure>
+                  <Link
+                    key={p.name}
+                    to={`/${p.name}`}
+                    onClick={() => setPkm(p)}
+                  >
+                    <div className="border rounded-2xl p-10 mb-3 mt-4">
+                      <figure className="text-center">
+                        <img
+                          className="w-[150px] h-[150px]"
+                          key={p.name}
+                          src={
+                            p.sprites.other["official-artwork"].front_default
+                          }
+                        />
+                        <figcaption>{p.name}</figcaption>
+                      </figure>
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>

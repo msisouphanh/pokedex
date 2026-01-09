@@ -1,1 +1,44 @@
 @import "tailwindcss";
+@import url("https://fonts.cdnfonts.com/css/aero");
+
+@font-face {
+  font-family: "OldSansBlack";
+  src: url("./assets/OldSansBlack.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --my-font: "Aero", sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-[#212529] min-h-screen;
+  }
+
+  h1 {
+    font-family: "Aero";
+    color: #fff;
+    font-size: 25px;
+  }
+
+  h2 {
+    font-family: "OldSansBlack";
+  }
+
+  p {
+    font-family: "OldSansBlack";
+    font-size: 20px;
+    color: #fff;
+  }
+
+  span {
+    font-family: "Aero";
+  }
+}
+
+@theme {
+  --color-cardgray: #495057;
+}
