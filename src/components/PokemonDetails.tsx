@@ -111,6 +111,10 @@ function PokemonDetails() {
     return result;
   }
 
+  function statPercentage(stat: number) {
+    const percentage = Math.min((stat / 255) * 100, 100);
+    return percentage;
+  }
   return (
     <>
       {pkm ? (
@@ -131,7 +135,7 @@ function PokemonDetails() {
                   </div>
                   <div className="flex flex-wrap justify-center gap-2">
                     {pkm.types.map((t) => (
-                      <div className="flex flex-1">
+                      <div key={t.type.name} className="flex flex-1">
                         <span
                           key={t.type.name}
                           className="border text-center w-full rounded-md border-slate-700 ml-1 mr-1 px-3 py-1"
@@ -149,7 +153,7 @@ function PokemonDetails() {
                   <div className="grid grid-cols-2 text-center">
                     <section>
                       <h1>Pokedex Number</h1>
-                      <p>{String(pkm.id).padStart(3, "0")}</p>
+                      <p>#{String(pkm.id).padStart(3, "0")}</p>
                     </section>
                     <section>
                       <h1>Abilities</h1>
@@ -172,25 +176,52 @@ function PokemonDetails() {
               </div>
             </div>
             <div className="w-full max-w-6xl mx-auto">
-              <p>test</p>
+              <div className="border rounded-lg">
+                <h1>stats</h1>
+                <div className="grid grid-cols-6 gap-6 bg-amber-950 ">
+                  {pkm.stats.map((p) => (
+                    <div
+                      key={p.stat.name}
+                      className="flex flex-col items-center gap-2"
+                    >
+                      {/* Bar container */}
+                      <div className="relative rounded h-[200px] w-full max-w-[60px] lg:max-w-[100px] bg-gray-700 overflow-hidden text-center">
+                        <div
+                          className="absolute bottom-0 w-full bg-orange-500 transition-all duration-500"
+                          style={{
+                            height: `${statPercentage(p.base_stat)}%`,
+                          }}
+                        />
+                        <span className="absolute bottom-0 p-4 inset-x-0 text-white font-bold">
+                          {p.base_stat}
+                        </span>
+                      </div>
+                      <span className="text-sm text-white capitalize text-center">
+                        {p.stat.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          {pkm.stats.map((p) => (
-            <p key={p.stat.name}>
-              {p.stat.name} {p.base_stat}
-            </p>
-          ))}
-          {pkm.abilities.map((p) => (
-            <p key={p.ability.name}>{p.ability.name}</p>
-          ))}
-          <p>Weight: {(pkm.weight * multiplier).toFixed(1)} lbs</p>
-          <p>Types: {pkm.types.map((t) => t.type.name).join(", ")}</p>
-          {evoPokemon.map((p) => (
-            <img
-              key={p.name}
-              src={p.sprites.other["official-artwork"].front_default}
-            ></img>
-          ))}
+          <div className="w-full max-w-6xl mx-auto">
+            {/* Evolutions */}
+            <div className="border rounded-lg">
+              <h1>Evolutions</h1>
+              <div className="flex flex-col justify-center items-center md:flex-row">
+                {evoPokemon.map((p) => (
+                  <figure className="text-center">
+                    <img
+                      key={p.name}
+                      src={p.sprites.other["official-artwork"].front_default}
+                    />
+                    <figcaption>{p.name}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </div>
         </>
       ) : (
         <p>Loading Pokémon...</p>
