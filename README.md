@@ -1,7 +1,7 @@
 ## Pokedex
 
 A side project I made, which is a website that utilizes the PokeAPI. It contains all Pokemon data. Right now it's still work in progress as 
-I plan to add more features to improve UX. 
+I plan to add features to improve UX. Currently there are missing features such as a search funciton, hover effects, transitions, etc.
 
 ### Technologies
 - `React`
