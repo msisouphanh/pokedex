@@ -1,6 +1,6 @@
 ## Pokedex
 
-Live Website [https://msisouphanh.github.io/pokedex/](https://msisouphanh.github.io/pokedex/)
+[Live Website](https://msisouphanh.github.io/pokedex/)
 
 A side project I made, which is a website that utilizes the PokeAPI. It contains all Pokemon data. Right now it's still work in progress as 
 I plan to add features to improve UX. Currently there are missing features such as a search funciton, hover effects, transitions, etc.
