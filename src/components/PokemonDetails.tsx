@@ -1,4 +1,5 @@
 import { useParams, Link, useLocation } from "react-router-dom";
+import { type Pokemon } from "../App.tsx";
 import { useState, useEffect } from "react";
 import { typeColors } from "../TypeColors";
 import type { PkmType } from "../TypeColors";
