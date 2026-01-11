@@ -35,4 +35,5 @@ I could also find a way to cache API responses to avoid repeated API calls
 5. Open your browser and navigate to `http://localhost:5173`
 
 ![Image the pokemon home page](poke2.jpg)
+<br>
 ![Image the pokemon details page](pokedex.jpg)
