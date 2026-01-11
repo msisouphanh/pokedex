@@ -33,3 +33,6 @@ I could also find a way to cache API responses to avoid repeated API calls
 3. Install React Router with: `npm install react-router-dom`
 4. Start the development server using: `npm run dev`
 5. Open your browser and navigate to `http://localhost:5173`
+
+![Image the pokemon home page](poke2.jpg)
+![Image the pokemon details page](pokedex.jpg)
