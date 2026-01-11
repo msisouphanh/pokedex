@@ -26,7 +26,7 @@ There is no search function as of right now. I am unsure of how to implement it 
 
 I could also find a way to cache API responses to avoid repeated API calls
 
-## Running the Portfolio
+## Running the Pokedex
 
 1. Clone the repository to your local machine.
 2. Install Vite by running: `npm install vite@latest`
