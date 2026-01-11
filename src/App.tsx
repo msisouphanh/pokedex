@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage.tsx";
 import PokemonPage from "./pages/PokemonPage.tsx";
 import { useEffect, useState } from "react";
@@ -87,18 +87,20 @@ function App() {
 
   return (
     <main>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              pokemon={pokemon}
-              onLoadMore={() => setPageUrl(nextUrl)}
-            />
-          }
-        />
-        <Route path=":pokemonName" element={<PokemonPage />} />
-      </Routes>
+      <HashRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                pokemon={pokemon}
+                onLoadMore={() => setPageUrl(nextUrl)}
+              />
+            }
+          />
+          <Route path=":pokemonName" element={<PokemonPage />} />
+        </Routes>
+      </HashRouter>
     </main>
   );
 }
