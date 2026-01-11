@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import pokemonLogo from "../assets/images/pokemonlogo.png";
+import pokemonLogo from "../images/pokemonlogo.png";
 
 function NavigationBar() {
   return (
