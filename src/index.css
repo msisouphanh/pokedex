@@ -8,10 +8,6 @@
   font-style: normal;
 }
 
-:root {
-  --my-font: "Aero", sans-serif;
-}
-
 @layer base {
   html,
   body {
@@ -26,6 +22,9 @@
 
   h2 {
     font-family: "OldSansBlack";
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
   }
 
   p {
@@ -37,8 +36,25 @@
   span {
     font-family: "Aero";
   }
+
+  section p {
+    margin-bottom: 1rem;
+    color: #c7c5c5;
+  }
+
+  figcaption {
+    font-family: "Aero";
+    color: #fff;
+    margin-top: 5px;
+  }
+
+  button {
+    font-family: "OldSansBlack";
+    color: #fff;
+  }
 }
 
 @theme {
   --color-cardgray: #495057;
+  --color-bargray: #42484e;
 }
