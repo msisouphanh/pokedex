@@ -86,8 +86,8 @@ function App() {
   }, [pageUrl]);
 
   return (
-    <main>
-      <HashRouter>
+    <HashRouter>
+      <main>
         <Routes>
           <Route
             path="/"
@@ -100,8 +100,8 @@ function App() {
           />
           <Route path=":pokemonName" element={<PokemonPage />} />
         </Routes>
-      </HashRouter>
-    </main>
+      </main>
+    </HashRouter>
   );
 }
 
