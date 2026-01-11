@@ -20,7 +20,7 @@ instead of requesting a entire call all at once, we can request data only for wh
 
 ### Future Improvements
 
-I plan to add transitions and visual effects to make animations smoother and interactions feel more responsive. Right now there are no transitions and visual effects .
+I plan to add transitions and visual effects to make animations smoother and interactions feel more responsive. Right now there are no transitions and visual effects.
 
 There is no search function as of right now. I am unsure of how to implement it right now.
 
